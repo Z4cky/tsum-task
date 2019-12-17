@@ -1,0 +1,10 @@
+<form *ngIf='!result' [formGroup]="form" (ngSubmit)="submit()">
+    <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
+    <button type="submit" class="btn btn-primary submit-button" [disabled]="disabled === true" >Сохранить</button>
+    <button type="button" class="btn btn-default" (click)="options.resetModel()">Сбросить</button>
+  </form>
+  <ng-container *ngIf='result'>
+      <ng-container *ngFor='let data of result | keyvalue'>
+          <p><b>{{data.key}}</b>{{data.value}}</p>
+        </ng-container>
+  </ng-container>
