@@ -61,6 +61,7 @@ export class FormComponent implements OnChanges, OnInit {
       type: "datepicker",
       templateOptions: {
         label: "дата рождения",
+        options: [],
         required: true,
       },
     },
@@ -78,9 +79,6 @@ export class FormComponent implements OnChanges, OnInit {
       validation: {
         show: true
       },
-      // expressionProperties: {
-      //   "templateOptions.required": "this.model.dateOfBirth.getFullYear() > new Date().getFullYear() - 18"
-      // },
       hooks: {
         onInit: (field) => {
           const family: any = [
@@ -91,21 +89,17 @@ export class FormComponent implements OnChanges, OnInit {
             { value: "divorced", name: "В разводе", genderId: "2" },
             { value: "none", name: "Нет", genderId: "2" },
           ];
-          const genderControl: any = this.form.get("gender");
+
           const dateControl: any = this.form.get("dateOfBirth");
-          field.templateOptions.options = dateControl.valueChanges.pipe(
-            startWith(dateControl.value),
-            map(() => {
-              return console.log("date control changed");
-              // family.reset
+          field.form.setValue = dateControl.valueChanges.subscribe((data) => {
+            if (this.model.dateOfBirth && this.model.dateOfBirth.getFullYear() > new Date().getFullYear() - 18) {
+            console.log("less than 18 years old");
+            return field.formControl.setValue(null);
             }
-            ),
-            tap((data) => {
-              console.log("date changed", data);
-              return field.formControl.setValue(data);
-            }),
+          }
           );
-          field.templateOptions.
+
+          const genderControl: any = this.form.get("gender");
           field.templateOptions.options = genderControl.valueChanges.pipe(
             startWith(genderControl.value),
             map((genderId) => family.filter((gender) => {
@@ -121,7 +115,6 @@ export class FormComponent implements OnChanges, OnInit {
       expressionProperties: {
         "templateOptions.": "!model.text",
         "templateOptions.required": "field.hide === false",
-        "form.setValue.setValue()": "field.hide === false"
       },
     },
     {
@@ -149,11 +142,7 @@ export class FormComponent implements OnChanges, OnInit {
               input.stepUp(1);
             } else if (event.keyCode === 189) {
               console.log("-", this.childrenCount);
-              if (this.childrenCount > 0) {
-                input.stepDown(1);
-              } else {
-                input.stepDown(0);
-              }
+              input.stepDown(1);
             }
           }));
         },

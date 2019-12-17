@@ -5,6 +5,11 @@ $material-icons-font-path: "~material-icons/iconfont/";
 b{
   margin-right:10px;
 }
+.hiden{
+  visibility:hidden;
+  height:0!important;
+  padding:0!important;
+}
 .form-wrapper {
   display: flex;
   flex-direction: column;
