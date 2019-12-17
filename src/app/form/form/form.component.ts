@@ -52,7 +52,7 @@ export class FormComponent implements OnChanges, OnInit {
           { value: "Мужской", label: "Мужской", genderId: "1" },
           { value: "Женский", label: "Женский", genderId: "2" },
         ],
-        valueProp: "genderId",
+        valueProp: "value",
         labelProp: "label",
       },
     },
@@ -82,12 +82,12 @@ export class FormComponent implements OnChanges, OnInit {
       hooks: {
         onInit: (field) => {
           const family: any = [
-            { value: "marriedF", name: "Замужем", genderId: "2" },
-            { value: "marriedM", name: "Женат", genderId: "1" },
-            { value: "divorced", name: "В разводе", genderId: "1" },
-            { value: "none", name: "Нет", genderId: "1" },
-            { value: "divorced", name: "В разводе", genderId: "2" },
-            { value: "none", name: "Нет", genderId: "2" },
+            { value: "marriedF", name: "Замужем", genderId: "Женский" },
+            { value: "marriedM", name: "Женат", genderId: "Мужской" },
+            { value: "divorced", name: "В разводе", genderId: "Мужской" },
+            { value: "none", name: "Нет", genderId: "Мужской" },
+            { value: "divorced", name: "В разводе", genderId: "Женский" },
+            { value: "none", name: "Нет", genderId: "Женский" },
           ];
 
           const dateControl: any = this.form.get("dateOfBirth");
