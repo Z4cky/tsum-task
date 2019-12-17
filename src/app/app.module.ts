@@ -5,7 +5,6 @@ import { FormsModule } from "@angular/forms";
 import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
 
-import { DataService } from "./services/data-service";
 import { FormModule } from "./form/form.module";
 import { MatNativeDateModule } from "@angular/material";
 
@@ -17,14 +16,12 @@ import { MatNativeDateModule } from "@angular/material";
     FormsModule,
     FormModule,
     MatNativeDateModule
-    // BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,
   ],
   providers: [
-    // FoldersResolver,
-    DataService,
+
   ],
   bootstrap: [
     AppComponent,
